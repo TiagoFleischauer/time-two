@@ -1,3 +1,39 @@
 :root {
-  --primary: blue;
+  /* Neutros com leve tom azulado para harmonizar com a paleta */
+  --gray-100: #e3eaf2;
+  --gray-200: #c8d5e3;
+  --gray-300: #9fb3c8;
+  --gray-400: #566b82;
+  --gray-500: #46586d;
+  --gray-600: #35455a;
+  --gray-700: #263446;
+  --gray-800: #17222f;
+  --gray-900: #0a121b;
+
+  /* Paleta principal (da imagem) */
+  --primary-light: #81d4fa;
+  --primary: #29b6f6;
+  --primary-dark: #0288d1;
+
+  --link-color: #4fc3f7;
+  --link-hover: #b3e5fc;
+
+  --success: #22c55e;
+  --warning: #eab308;
+  --error: #991b1b;
+  --info: #b3e5fc;
+
+  --text-over-primary: #0a121b;
+  --text-over-primary-dark: #ffffff;
+  --text-over-primary-light: #0a121b;
+  --text-over-success: #0a121b;
+  --text-over-warning: #0a121b;
+  --text-over-error: #e3eaf2;
+  --text-over-info: #0a121b;
+
+  --text-default: #e3eaf2;
+  --text-muted: #9fb3c8;
+
+  --disabled: #566b82;
+  --text-disabled: #9fb3c8;
 }
