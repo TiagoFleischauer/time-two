@@ -1,6 +1,12 @@
-import { HistoryIcon, HomeIcon, SettingsIcon, SunIcon } from 'lucide-react';
-import styles from './styles.module.css';
 import { useEffect, useState } from 'react';
+import {
+  HistoryIcon,
+  HomeIcon,
+  MoonIcon,
+  SettingsIcon,
+  SunIcon,
+} from 'lucide-react';
+import styles from './styles.module.css';
 
 type Themes = 'dark' | 'light';
 
@@ -51,7 +57,7 @@ export function Menu() {
         aria-label='Mudar o tema'
         onClick={handleThemeChange}
       >
-        <SunIcon />
+        {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
       </a>
     </div>
   );
