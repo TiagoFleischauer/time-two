@@ -1,21 +1,21 @@
 import { useRef } from 'react';
 
 import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
-import { Cycles } from '../Cycles';
 
 import { DefaultButton } from '../DefaultButton';
 import { DefaultInput } from '../DefaultInput';
+import { Cycles } from '../Cycles';
 
 import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
+
 import type { TaskModel } from '../../models/TaskModel';
 
 import { getNextCycle } from '../../utils/getNextCycle';
 import { getCycleType } from '../../utils/getCycleType';
-import { formatSecondsToMinutes } from '../../utils/formatTime';
 
 export function MainForm() {
   const taskNameInput = useRef<HTMLInputElement>(null);
-  const { state, setState } = useTaskContext();
+  const { state, handleStartTask, handleInterruptTask } = useTaskContext();
 
   const nextCycle = getNextCycle(state.currentCycle);
   const nextCycleType = getCycleType(nextCycle);
@@ -43,39 +43,7 @@ export function MainForm() {
       type: nextCycleType,
     };
 
-    const secondsRemaining = state.config[nextCycleType] * 60;
-
-    setState(prev => ({
-      ...prev,
-      config: { ...prev.config },
-      activeTask: newTask,
-      currentCycle: nextCycle,
-      secondsRemaining: nextCycleDuration * 60,
-      formattedTime: formatSecondsToMinutes(secondsRemaining),
-      tasks: [...prev.tasks, newTask],
-    }));
-  }
-
-  function handleStopTask() {
-    if (!state.activeTask) return;
-
-    setState(prev => {
-      return {
-        ...prev,
-        activeTask: null,
-        secondsRemaining: 0,
-        formattedTime: '00:00',
-        tasks: prev.tasks.map(task => {
-          if (task.id === prev.activeTask?.id) {
-            return {
-              ...task,
-              interruptedDate: Date.now(),
-            };
-          }
-          return task;
-        }),
-      };
-    });
+    handleStartTask(newTask);
   }
 
   return (
@@ -116,7 +84,7 @@ export function MainForm() {
             color='secondary'
             icon={<StopCircleIcon />}
             key='stopTaskButton'
-            onClick={handleStopTask}
+            onClick={handleInterruptTask}
           />
         )}
       </div>
